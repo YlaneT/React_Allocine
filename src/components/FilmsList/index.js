@@ -28,7 +28,7 @@ const FilmsList = () => {
 				
 			{films.map(f => (
 				<Film key={f.id}>
-						<Titre>{f.title} ({f.year})</Titre>
+					<Titre>{f.title} ({f.year})</Titre>
 					<Link to={`/Films/${f.id}`}>
 						<Poster src={f.image}/>
 					</Link> 
@@ -54,7 +54,7 @@ const Film = styled.div`
 	border-radius : 30px;
 	background-color : rgb(255,225,100);
 	text-decoration : none;
-	grid-template-rows : 1fr 3fr 1fr;
+	grid-template-rows : 1fr 3fr auto;
 `
 
 const Titre = styled.h1`

@@ -3,7 +3,9 @@ import React from 'react';
 const Home = () => {
 	return (
 		<div>
-			Home
+			<p>Page d'accueil</p>
+			<p>Site réalisé par Ylane TURAM</p>
+			<p>No rights reserved</p>
 		</div>
 	);
 };

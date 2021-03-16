@@ -20,6 +20,7 @@ const Navbar = () => {
 	return (
 		<nav class="navbar">
 				<Link to="/Films">Films</Link>
+				<Link to="/Favorites">Favs</Link>
 				
 				{isLogged ? (<LogButton backColor='red' onClick={handleLogout}>Logout</LogButton>) : <LogButton backColor='pink'  onClick={handleLogin}>Login</LogButton>}
 		</nav>
