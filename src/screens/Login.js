@@ -34,7 +34,6 @@ const submit = (evenement,formState,setErrorMessage,history) => {
 const Login = ({history}) => {
 	useEffect(()=>{
 		const token = localStorage.getItem('token');
-		console.log('Login token -> ', token);
 		if (token){
 			history.push('/')
 		}

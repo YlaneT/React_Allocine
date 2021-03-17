@@ -5,10 +5,7 @@ import {useHistory} from 'react-router-dom'
 const Signin = ({submit}) => {
 	const [formState,setFormState] = useState({username:'',password:''});
 	const [errorMessage,setErrorMessage] = useState('');
-	// attention, si on n'utilise pas le spread Operator, on ne récupérera que le dernier champ modifié.
-	useEffect(()=> { console.log("formstate : ", formState)})
 
-	/* Hook permettant d'avoir accès à l'objet history de props même en dehors d'une page gérée par le router */
 	const history = useHistory();
 	var errMsg = null;
 	if (errorMessage !== ''){

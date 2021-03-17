@@ -9,15 +9,19 @@ import axios from 'axios';
 
 const DetailsFilm = props => {
 
-	const [film, setFilm] = useState({});
+	const [film, setFilm]						= useState({});
 	const [threeActors, set3actors] = useState([]);
+	const [fav, setFav]	=	useState(JSON.parse(localStorage.getItem("Favorites")))
 
 	const setFilmAndActors = film => {
 		setFilm(film);
 		if (film.actorList.length >= 3){
 			film.actorList.length = 3;
 		}
-		set3actors(film.actorList)
+		set3actors(film.actorList);
+		setFav({id : film.id, title : film.title, image : film.image, plot : film.plot, directors : film.directors})
+
+
 	}
 
 	useEffect(() => {
@@ -29,25 +33,60 @@ const DetailsFilm = props => {
 			method: 'GET',
 			url : generatedUrl
 		}).then(res => {
-			// console.log("props ", props);
-			// console.log(props.match.params.id);
-			console.log(res.data);
-			// console.log(generatedUrl);
 			setFilmAndActors(res.data)
-			// console.log("film ", film);
-			// console.log("film.actorList ", film.actorList);
-			// console.log(threeActors);
-			// console.log(threeActors);
+			console.log(fav)
+			console.log(isFavorited(fav))
 		}).catch(err => console.log(err))
 	},[])
 
-	console.log(threeActors);
+	const isFavorited = (film) => {
+		const currentFavorites = localStorage.getItem('Favorites') ? JSON.parse(localStorage.getItem('Favorites')) : []
+		var isPresent = false
+		currentFavorites.forEach(fav => {
+			if (fav.id === film.id) {
+				isPresent = true;
+			}
+		})
+		return isPresent
+	}
 
+	// const toggleFavorite = (film) => {
+	// 	var currentFavorites = localStorage.getItem('Favorites')? JSON.parse(localStorage.getItem('Favorites')): [];
+	// 	currentFavorites.includes(film) ? removeFavorite(film, currentFavorites) : addFavorite(film, currentFavorites);
+	// }
+
+	const addFavorite = (film) => {
+		var currentFavorites = localStorage.getItem('Favorites')? JSON.parse(localStorage.getItem('Favorites')): [];
+		if (isFavorited (film)) {
+			alert("Le film est déjà dans vos favoris");
+		} else {
+		currentFavorites.push(film);
+		localStorage.setItem('Favorites',JSON.stringify(currentFavorites));
+		console.log(currentFavorites);
+		alert (`${film.title} a été ajouté aux favoris`)
+		}
+
+	}
+
+	// const removeFavorite = (film) => {
+	// 	var currentFavorites = localStorage.getItem('Favorites')? JSON.parse(localStorage.getItem('Favorites')): [];
+	// 	currentFavorites.splice(currentFavorites.indexOf(film),1)
+	// 	localStorage.setItem('Favorites',JSON.stringify(currentFavorites))
+	// }
 
 	return (
 		<Details>
 					<FilmTitle>{film.title}</FilmTitle>
 					<Poster src={film.image} alt={`${film.fullTitle}`}/>
+					
+					{/* {
+						isFavorited(fav) ?
+						<FavButton backColor="Red" onClick={() => removeFavorite(fav)}> Remove from Favorites</FavButton> : */}
+						<FavButton backColor="Yellow" onClick={() => addFavorite(fav)}> Add to Favorites</FavButton>
+					{/* } */}
+					
+
+
 					<Synopsis>{film.plot}</Synopsis>
 					<StarsList>
 						
@@ -78,7 +117,7 @@ const Details = styled.div`
 	display:grid;
 	grid-gap : 10px;
 	grid-template-columns:30% 70%;
-	grid-template-rows : 75px auto 200px 100px;
+	grid-template-rows : 75px 200px auto auto 200px;
 	justify-content:center;
 `
 
@@ -92,12 +131,28 @@ const FilmTitle = styled.h1`
 `
 
 const Poster = styled.img`
-	max-width:100%;
-	display:inline-grid;
+	max-width : 100%;
+	display : inline-grid;
 	grid-column-start : 1;
 	grid-column-end : 2;
 	grid-row-start : 2;
 	grid-row-end:3;
+`
+
+const FavButton = styled.button`
+	max-width : 100%;
+	height : auto;
+	margin : auto;
+	padding : 5px 5px;
+	font-size : 120%;
+	display : inline-grid;
+	border-radius : 8px;
+	grid-column-start : 1;
+	grid-column-end : 2;
+	grid-row : 3;
+	background-color : ${props => props.backColor};
+	border : solid black 1px;
+	box-shadow : 2px 2px 2px black;
 `
 
 const Synopsis = styled.span`
@@ -105,8 +160,7 @@ const Synopsis = styled.span`
 	text-align: justify;
 	grid-column-start:2;
 	grid-column-end:3;
-	grid-row-start : 2;
-	grid-row-end : 3;
+	grid-row: 2 / 4;
 `
 
 
@@ -114,9 +168,8 @@ const StarsList = styled.div`
 	display:inline-grid;
 	grid-column-start:1;
 	grid-column-end:3;
-	grid-row-start : 3;
-	grid-row-end : 4;
-	width : 90%;
+	grid-row : 5;
+	width : 95%;
 	margin:auto;
 	justify-content:center;
 	grid-template-columns : 1fr 1fr 1fr;
@@ -124,19 +177,19 @@ const StarsList = styled.div`
 `
 
 const Star = styled.div`
-width : 80%;
+width : 90%;
 `
 
 const StarImage = styled.img`
 	width : 80%;
+	margin : auto;
 `
 
 const DirectorsList = styled.span`
 	display:inline-grid;
-	grid-column-start:1;
-	grid-column-end:3;
-	grid-row-start : 4;
-	grid-row-end : 5;
+	padding-top : 15px;
+	grid-column : 1 / 3;
+	grid-row : 4;
 `
 
 export default DetailsFilm;

@@ -35,10 +35,12 @@ const LogButton = styled.button `
 	padding-right : 10px;
 	background-color : ${props => props.backColor};
 	font-weight : bold;
-	border-radius  : 5px;
+	border-radius  : 8px;
 	position :absolute;
 	right: 15px;
 	color: white;
+	border : solid black 1px;
+	box-shadow : 2px 2px 2px black;
 `
 
 export default Navbar;
