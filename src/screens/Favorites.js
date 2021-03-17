@@ -3,19 +3,26 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Favorites = () => {
+	const [favs, setFav] = useState([])
+	useEffect(() => {
+		console.log("Fav -> ", favs)
+		console.log("localStorage -> ", localStorage.getItem('Favorites'))
+		setFav(JSON.parse(localStorage.getItem('Favorites')))
+	})
 
 	const removeFav = (film) => {
-		var favsToModify = JSON.parse(localStorage.getItem('Favorites'));
+		var favsToModify = favs;
 		favsToModify.splice(favsToModify.indexOf(film),1)
-		localStorage.setItem('Favorites',JSON.stringify(favsToModify))
+		setFav(favsToModify)
+		localStorage.setItem('Favorites',JSON.stringify(favs))
 	}	
 
 	return (
 		<div>
 			<Titre>Liste de Favoris</Titre>
-			{	JSON.parse(localStorage.getItem('Favorites')) === [] ? <p>Votre liste de favoris est vide : </p> :
+			{favs === [] ? <p>Votre liste de favoris est vide : </p> :
 			<ListeFavoris>
-				{JSON.parse(localStorage.getItem('Favorites')).map(film =>
+				{favs.map(film =>
 					<Film key={film.id}>
 						<Synopsis>
 							<TitreFilm>{film.title}</TitreFilm> : {film.plot}<br/>Directed by : {film.directors}
