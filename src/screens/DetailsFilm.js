@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-
+import Reviews from "../components/Reviews"
 
 
 const DetailsFilm = props => {
@@ -75,37 +75,40 @@ const DetailsFilm = props => {
 	// }
 
 	return (
-		<Details>
-					<FilmTitle>{film.title}</FilmTitle>
-					<Poster src={film.image} alt={`${film.fullTitle}`}/>
-					
-					{/* {
-						isFavorited(fav) ?
-						<FavButton backColor="Red" onClick={() => removeFavorite(fav)}> Remove from Favorites</FavButton> : */}
-						<FavButton backColor="Yellow" onClick={() => addFavorite(fav)}> Add to Favorites</FavButton>
-					{/* } */}
-					
-
-
-					<Synopsis>{film.plot}</Synopsis>
-					<StarsList>
+		<div>
+			<Details>
+						<FilmTitle>{film.title}</FilmTitle>
+						<Poster src={film.image} alt={`${film.fullTitle}`}/>
 						
-						{threeActors.map(actor => (
-							<Star>
-								<Link to={`/People/${actor.id}`}>
-									<p>{actor.name}</p>
-									<StarImage src={actor.image} alt={actor.name}/> 
-								</Link>
-							</Star>
-						))}
-					</StarsList>
-					<DirectorsList>
-						Director(s) : {film?.directorList?.map(dir => ( dir.name ))}
-					</DirectorsList>
-					
-					
+						{/* {
+							isFavorited(fav) ?
+							<FavButton backColor="Red" onClick={() => removeFavorite(fav)}> Remove from Favorites</FavButton> : */}
+							<FavButton backColor="Yellow" onClick={() => addFavorite(fav)}> Add to Favorites</FavButton>
+						{/* } */}
+						
 
-		</Details>
+
+						<Synopsis>{film.plot}</Synopsis>
+						<StarsList>
+							
+							{threeActors.map(actor => (
+								<Star>
+									<Link to={`/People/${actor.id}`}>
+										<p>{actor.name}</p>
+										<StarImage src={actor.image} alt={actor.name}/> 
+									</Link>
+								</Star>
+							))}
+						</StarsList>
+						<DirectorsList>
+							Director(s) : {film?.directorList?.map(dir => ( dir.name ))}
+						</DirectorsList>
+						
+						
+
+			</Details>
+			{/* <Reviews idFilm={film.id}/> */}
+		</div>
 	);
 };
 

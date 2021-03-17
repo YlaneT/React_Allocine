@@ -8,13 +8,14 @@ const Favorites = () => {
 		console.log("Fav -> ", favs)
 		console.log("localStorage -> ", localStorage.getItem('Favorites'))
 		setFav(JSON.parse(localStorage.getItem('Favorites')))
-	})
+	},[])
 
 	const removeFav = (film) => {
 		var favsToModify = favs;
 		favsToModify.splice(favsToModify.indexOf(film),1)
 		setFav(favsToModify)
-		localStorage.setItem('Favorites',JSON.stringify(favs))
+		localStorage.setItem('Favorites',JSON.stringify(favsToModify))
+		window.location.reload();
 	}	
 
 	return (
@@ -28,7 +29,7 @@ const Favorites = () => {
 							<TitreFilm>{film.title}</TitreFilm> : {film.plot}<br/>Directed by : {film.directors}
 						</Synopsis>
 						<Poster src={film.image}/>
-						<UnfavButton onClick={removeFav(film)}>Remove from favorites</UnfavButton>
+						<UnfavButton onClick={() => removeFav(film)}>Remove from favorites</UnfavButton>
 					</Film>	
 				)}
 			</ListeFavoris>
@@ -42,14 +43,16 @@ const Titre = styled.h1`
 `
 
 const ListeFavoris = styled.div`
-	grid-auto-rows : auto;
+//	grid-auto-rows : 250px;
+	grid-template-rows : repeat(15,350px);
 	grid-gap : 10px;
 `
 
 const Film = styled.div`
+	display : inline-grid;
 	height : 200px;
 	grid-template-columns : 30% 70%;
-	grid-template-rows : 200px auto;
+	grid-template-rows : 200px auto auto;
 
 `
 
@@ -73,7 +76,7 @@ const Poster = styled.img`
 	display : inline-grid;
 	grid-column : 1;
 	grid-row : 1;
-	max-width : 100%;
+	max-height : 100%;
 	margin : auto;
 `
 
@@ -86,8 +89,8 @@ const UnfavButton = styled.button`
 	font-size : 120%;
 	display : inline-grid;
 	border-radius : 8px;
-	grid-column : 1 ;
-	grid-row : 2 ;
+	grid-column : 1 / 3 ;
+	grid-row : 3 ;
 	background-color : orange;
 	border : solid black 1px;
 	box-shadow : 2px 2px 2px black;
