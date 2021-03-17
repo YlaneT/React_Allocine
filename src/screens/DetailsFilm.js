@@ -26,16 +26,12 @@ const DetailsFilm = props => {
 
 	useEffect(() => {
 		const generatedUrl = `${url_base}en/API/Title/${apikey}/${props.match.params.id}`;
-
-		// https://imdb-api.com/en/API/Title/k_qjztqrcj/{id}
-		// https://imdb-api.com/en/API/Title/k_qjztqrcj/tt1375666
+		
 		axios({
 			method: 'GET',
 			url : generatedUrl
 		}).then(res => {
 			setFilmAndActors(res.data)
-			console.log(fav)
-			console.log(isFavorited(fav))
 		}).catch(err => console.log(err))
 	},[])
 
@@ -50,11 +46,6 @@ const DetailsFilm = props => {
 		return isPresent
 	}
 
-	// const toggleFavorite = (film) => {
-	// 	var currentFavorites = localStorage.getItem('Favorites')? JSON.parse(localStorage.getItem('Favorites')): [];
-	// 	currentFavorites.includes(film) ? removeFavorite(film, currentFavorites) : addFavorite(film, currentFavorites);
-	// }
-
 	const addFavorite = (film) => {
 		var currentFavorites = localStorage.getItem('Favorites')? JSON.parse(localStorage.getItem('Favorites')): [];
 		if (isFavorited (film)) {
@@ -62,31 +53,18 @@ const DetailsFilm = props => {
 		} else {
 		currentFavorites.push(film);
 		localStorage.setItem('Favorites',JSON.stringify(currentFavorites));
-		console.log(currentFavorites);
 		alert (`${film.title} a été ajouté aux favoris`)
 		}
 
 	}
-
-	// const removeFavorite = (film) => {
-	// 	var currentFavorites = localStorage.getItem('Favorites')? JSON.parse(localStorage.getItem('Favorites')): [];
-	// 	currentFavorites.splice(currentFavorites.indexOf(film),1)
-	// 	localStorage.setItem('Favorites',JSON.stringify(currentFavorites))
-	// }
 
 	return (
 		<div>
 			<Details>
 						<FilmTitle>{film.title}</FilmTitle>
 						<Poster src={film.image} alt={`${film.fullTitle}`}/>
-						
-						{/* {
-							isFavorited(fav) ?
-							<FavButton backColor="Red" onClick={() => removeFavorite(fav)}> Remove from Favorites</FavButton> : */}
-							<FavButton backColor="Yellow" onClick={() => addFavorite(fav)}> Add to Favorites</FavButton>
-						{/* } */}
-						
-
+		
+						<FavButton backColor="Yellow" onClick={() => addFavorite(fav)}> Add to Favorites</FavButton>
 
 						<Synopsis>{film.plot}</Synopsis>
 						<StarsList>

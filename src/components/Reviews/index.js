@@ -29,7 +29,7 @@ const Reviews = (props) => {
 				<h2>You can add a review here</h2>
 
 				<form onSubmit={(e) => {
-					e.preventDefault(); // permet de ne pas reload la page quand on submit
+					e.preventDefault();
 					if (!comments){
 						alert("Vide")
 					}

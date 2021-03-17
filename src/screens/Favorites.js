@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Favorites = () => {
 	const [favs, setFav] = useState([])
 	useEffect(() => {
-		console.log("Fav -> ", favs)
-		console.log("localStorage -> ", localStorage.getItem('Favorites'))
 		setFav(JSON.parse(localStorage.getItem('Favorites')))
 	},[])
 

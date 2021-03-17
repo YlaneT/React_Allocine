@@ -4,11 +4,9 @@ import axios from 'axios';
 
 const submit = (evenement,formState,setErrorMessage,history) => {
 
-	// prévient JS de ne pas utiliser le comportement de base, à savoir raffraichir la page
 	evenement.preventDefault();
 
 	if (!formState.username || !formState.password) {
-		// Si à la validation, il manque le username ou password
 		setErrorMessage("Les champs ne doivent pas être vides");
 		return;
 	}
@@ -22,8 +20,7 @@ const submit = (evenement,formState,setErrorMessage,history) => {
 		}
 	}).then(res => {
 		localStorage.setItem('token', res.headers['x-access-token']);
-		/* Redirige le user vers la page Characters */
-		history.push('/Home')
+		history.push('/')
 		window.location.reload();
 	}).catch(err => {
 		console.log(err);

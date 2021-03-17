@@ -12,12 +12,10 @@ const FilmsList = () => {
 	useEffect(() => {
 		const generatedUrl = `${url_base}en/API/Top250Movies/${apikey}`;
 
-		// https://imdb-api.com/en/API/Top250Movies/k_qjztqrcj
 		axios({
 			method: 'GET',
 			url : generatedUrl
 		}).then(res => {
-			console.log(res.data.items);
 			setFilms(res.data.items)
 		}
 		).catch(err => console.log(err))

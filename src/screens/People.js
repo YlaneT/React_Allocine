@@ -21,13 +21,10 @@ const setCelebAndFilms = celeb => {
 useEffect(() => {
 	const generatedUrl = `${url_base}en/API/Name/${apikey}/${props.match.params.id}`;
 
-	// https://imdb-api.com/en/API/Name/k_qjztqrcj/nm0000154
 	axios({
 		method: 'GET',
 		url : generatedUrl
 	}).then(res => {
-		console.log(generatedUrl);
-		console.log(res.data);
 		setCelebAndFilms(res.data)
 	}
 	).catch(err => console.log(err))

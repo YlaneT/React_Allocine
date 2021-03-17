@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components'
 import {useHistory} from 'react-router-dom'
 
@@ -16,10 +16,9 @@ const Signin = ({submit}) => {
 		<div>
 			<StyledTitle>Authentication form</StyledTitle>
 			<StyledForm onSubmit={ e=>submit (e, formState, setErrorMessage,history)} >
-			{/* if qui vérifie si les deux champs sont remplis*/}
 				<StyledLabel for="UN">Username : </StyledLabel>
 			
-				<StyledInput type="text" name="UN" onChange={e => setFormState({...formState /* spread Operator */, username : e.target.value})}></StyledInput>
+				<StyledInput type="text" name="UN" onChange={e => setFormState({...formState, username : e.target.value})}></StyledInput>
 
 				<StyledLabel for="PW">Password : </StyledLabel>
 				<StyledInput type="password" name="PW" onChange={e => setFormState({...formState, password : e.target.value})}></StyledInput>
