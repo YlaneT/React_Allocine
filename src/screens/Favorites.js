@@ -40,17 +40,17 @@ const Titre = styled.h1`
 `
 
 const ListeFavoris = styled.div`
-//	grid-auto-rows : 250px;
-	grid-template-rows : repeat(15,350px);
-	grid-gap : 10px;
+	display:table;
+	width: 95%;
+	margin: auto;
 `
 
 const Film = styled.div`
+	width:95%;
 	display : inline-grid;
-	height : 200px;
 	grid-template-columns : 30% 70%;
 	grid-template-rows : 200px auto auto;
-
+	
 `
 
 const Synopsis = styled.p`
@@ -73,17 +73,17 @@ const Poster = styled.img`
 	display : inline-grid;
 	grid-column : 1;
 	grid-row : 1;
-	max-height : 100%;
+	max-width : 100%;
 	margin : auto;
 `
 
 const UnfavButton = styled.button`
 	display : inline-grid;
-	max-width : 100%;
+	max-width : 50%;
 	height : auto;
-	margin : auto;
+	margin : 15px auto 30px auto;
 	padding : 5px 5px;
-	font-size : 120%;
+	font-size : 90%;
 	display : inline-grid;
 	border-radius : 8px;
 	grid-column : 1 / 3 ;
