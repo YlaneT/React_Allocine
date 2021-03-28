@@ -1,6 +1,6 @@
 {
   "name": "react_allocine",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "engines": {
     "node": "14.x",
@@ -12,8 +12,6 @@
     "@testing-library/user-event": "^12.1.10",
     "allocine-api": "^0.1.9",
     "axios": "^0.21.1",
-    "express": "^4.17.1",
-    "heroku": "^7.51.0",
     "moment": "^2.29.1",
     "moviedb": "^0.2.10",
     "react": "^17.0.1",
@@ -40,8 +38,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
